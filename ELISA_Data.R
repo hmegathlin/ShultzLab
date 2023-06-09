@@ -20,9 +20,11 @@ elisa$AdjConc <- as.numeric(elisa$AdjConc)
 elisa$AdjConc <- replace_na(elisa$AdjConc, 0)
 elisa_wider <- pivot_wider(elisa, names_from=TimePoint, values_from=AdjConc, id_cols=Mouse)
 
+elisa$TimePoint[elisa$TimePoint==T1] <- "24hours"
+
 
 
 write_csv(elisa_wider, "Avg_AdjConc.csv")
 
 
-
+ggplot(elisa, aes(x=TimePoint, y=AdjConc)) + geom_point()
